@@ -45,9 +45,7 @@ public class MinesweeperBoard {
     * @return boolean - whether there was a Cell instance at the given position for a value property to be set.
     */
     public boolean setCell(int row, int col, char value) {
-        if (this.cells[row][col] instanceof Cell == false) {
-            return false;
-        }
+        if (this.cells[row][col] instanceof Cell == false) return false;
         this.cells[row][col].setValue(value);
         return true;
     }
@@ -78,9 +76,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_cell(int row, int col){
-        if (! cell_in_bounds(row,col)) {
-            return null;
-        }
+        if (! cell_in_bounds(row,col)) return null;
         return this.cells[row][col];
     }
 
@@ -108,8 +104,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_top_cell(int row, int col) {
-        row--;
-        return get_cell(row, col);
+        return get_cell(--row, col);
     }
 
     /**
@@ -120,9 +115,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_top_right_diagnoal_cell(int row, int col) {
-        row--;
-        col++;
-        return get_cell(row, col);
+        return get_cell(--row, ++col);
     }
 
     /**
@@ -133,8 +126,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_right_cell(int row, int col) {
-        col++;
-        return get_cell(row, col);
+        return get_cell(row, ++col);
     }
 
     /**
@@ -145,9 +137,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_bottom_right_diagnoal_cell(int row, int col) {
-        row++;
-        col++;
-        return get_cell(row, col);
+        return get_cell(++row, ++col);
     }
 
     /**
@@ -158,8 +148,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_bottom_cell(int row, int col) {
-        row++;
-        return get_cell(row, col);
+        return get_cell(++row, col);
     }
 
     /**
@@ -170,9 +159,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_bottom_left_diagnoal_cell(int row, int col) {
-        row++;
-        col--;
-        return get_cell(row, col);
+        return get_cell(++row, --col);
     }
 
     /**
@@ -183,8 +170,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_left_cell(int row, int col) {
-        col--;
-        return get_cell(row, col);
+        return get_cell(row, --col);
     }
 
     /**
@@ -195,9 +181,7 @@ public class MinesweeperBoard {
      * @return Cell | null
      */
     private Cell get_top_left_diagnoal_cell(int row, int col) {
-        row--;
-        col--;
-        return get_cell(row, col);
+        return get_cell(--row, --col);
     }
 
 
@@ -209,58 +193,39 @@ public class MinesweeperBoard {
             for (int j = 0; j < colsCount; j++) {
 
                 // if the current Cell contains a mine, let's skip this iteration.
-                if (this.cells[i][j].hasMine()) {
-                    continue;
-                }
+                if (this.cells[i][j].hasMine()) continue;
 
                 // for all non-mine cells, set the default value to 0
                 cells[i][j].setValue('0');
-
 
                 // let's get all Cells surrounding the current Cell,
                 // checking if the other Cells have a mine.
                 // if there is a mine Cell touching the current Cell,
                 // proceed to update the value of the current Cell.
                 Cell topCell = get_top_cell(i, j);
-                if (topCell != null && topCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (topCell != null && topCell.hasMine() == true) update_cell(i, j);
 
                 Cell trdCell = get_top_right_diagnoal_cell(i, j);
-                if (trdCell != null && trdCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (trdCell != null && trdCell.hasMine() == true) update_cell(i, j);
 
                 Cell rightCell = get_right_cell(i, j);
-                if (rightCell != null && rightCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (rightCell != null && rightCell.hasMine() == true) update_cell(i, j);
 
                 Cell brdCell = get_bottom_right_diagnoal_cell(i, j);
-                if (brdCell != null && brdCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (brdCell != null && brdCell.hasMine() == true) update_cell(i, j);
 
                 Cell bottomCell = get_bottom_cell(i, j);
-                if (bottomCell != null && bottomCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (bottomCell != null && bottomCell.hasMine() == true) update_cell(i, j);
 
                 Cell bldCell = get_bottom_left_diagnoal_cell(i, j);
-                if (bldCell != null && bldCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (bldCell != null && bldCell.hasMine() == true) update_cell(i, j);
 
                 Cell leftCell = get_left_cell(i, j);
-                if (leftCell != null && leftCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (leftCell != null && leftCell.hasMine() == true) update_cell(i, j);
 
 
                 Cell tldCell = get_top_left_diagnoal_cell(i, j);
-                if (tldCell != null && tldCell.hasMine() == true) {
-                    update_cell(i, j);
-                }
+                if (tldCell != null && tldCell.hasMine() == true) update_cell(i, j);
             }
         }
 

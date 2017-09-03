@@ -6,7 +6,7 @@ import java.util.Scanner;
  *
  * @author Ashley Menhennett <ashleymenhennett@gmail.com>
  */
-public class MinesweeperSolver {
+public class Application {
 
     /**
      * @param args the command line arguments
